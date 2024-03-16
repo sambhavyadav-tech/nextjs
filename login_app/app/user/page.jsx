@@ -8,7 +8,7 @@ const Admin = () => {
     const router = useRouter();
     const logout = () => {
         // Implement logout logic here (e.g., remove authentication token, clear session)
-        localStorage.clear(); 
+        localStorage.clear();
         router.push('/login');
     };
 
@@ -24,8 +24,8 @@ const Admin = () => {
     return (
         <AdminLayout>
             <div className="container mx-auto max-w-md mt-20">
-                <h2 className="text-2xl font-bold mb-6">Admin Page</h2>
-                <p>Welcome to the admin page!</p>
+                <h2 className="text-2xl font-bold mb-6">User Page</h2>
+                <p>Welcome to the user page!</p>
                 {/* <p>logout here</p>
                 <button type="button" onClick={() => logout()} className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg">Logout</button> */}
             </div>
