@@ -1,224 +1,188 @@
-// pages/admin/tenders.js
+
 'use client'
-
-// import React from 'react';
-// import AdminLayout from '../../components/adminlayout'
-// const AdminTenders = () => {
-//     // Add logic for adding, updating, and deleting tenders here
-
-//     return (
-//         <AdminLayout>
-//             <div className="container mx-auto max-w-3xl">
-//                 <h1 className="text-2xl font-bold mb-4">Tenders</h1>
-//                 {/* Add tender list component or form for adding tenders */}
-//                 <button className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg">
-//                     Add Tender
-//                 </button>
-//             </div>
-//         </AdminLayout>
-//     );
-// };
-
-// export default AdminTenders;
-
-
-///////////////////////////////////////////////
-// pages/admin/tenders.js
-
-// import React, { useState } from 'react';
-// import AdminLayout from '../../components/adminlayout';
-
-// const AdminTenders = () => {
-//     const [tenders, setTenders] = useState([]);
-//     const [newTender, setNewTender] = useState({
-//         name: '',
-//         description: '',
-//         lastDate: ''
-//     });
-//     const [selectedTender, setSelectedTender] = useState(null);
-
-//     const handleInputChange = (e) => {
-//         setNewTender({
-//             ...newTender,
-//             [e.target.name]: e.target.value
-//         });
-//     };
-
-//     const handleAddTender = () => {
-//         setTenders([...tenders, newTender]);
-//         setNewTender({
-//             name: '',
-//             description: '',
-//             lastDate: ''
-//         });
-//     };
-
-//     const handleUpdateTender = () => {
-//         // Implement update logic
-//         // Here you can update the selected tender in the tenders array
-//     };
-
-//     const handleDeleteTender = () => {
-//         // Implement delete logic
-//         // Here you can remove the selected tender from the tenders array
-//     };
-
-//     const handleSelectTender = (index) => {
-//         setSelectedTender(tenders[index]);
-//     };
-
-//     const handleSubmit = (e) => {
-//         e.preventDefault();
-//         handleAddTender();
-//     };
-
-//     return (
-//         <AdminLayout>
-//             <div className="container mx-auto max-w-3xl">
-//                 <h1 className="text-2xl font-bold mb-4">Add Tender</h1>
-//                 <form onSubmit={handleSubmit} className="mb-4">
-//                     <div className="mb-4">
-//                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
-//                             Tender Name
-//                         </label>
-//                         <input
-//                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                             id="name"
-//                             type="text"
-//                             placeholder="Enter tender name"
-//                             name="name"
-//                             value={newTender.name}
-//                             onChange={handleInputChange}
-//                         />
-//                     </div>
-//                     <div className="mb-4">
-//                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="description">
-//                             Description
-//                         </label>
-//                         <textarea
-//                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                             id="description"
-//                             placeholder="Enter tender description"
-//                             name="description"
-//                             value={newTender.description}
-//                             onChange={handleInputChange}
-//                         ></textarea>
-//                     </div>
-//                     <div className="mb-4">
-//                         <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastDate">
-//                             Last Date to Apply
-//                         </label>
-//                         <input
-//                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-//                             id="lastDate"
-//                             type="date"
-//                             name="lastDate"
-//                             value={newTender.lastDate}
-//                             onChange={handleInputChange}
-//                         />
-//                     </div>
-//                     <button
-//                         className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
-//                         type="submit"
-//                     >
-//                         Add Tender
-//                     </button>
-//                 </form>
-//                 <div>
-//                     <h2 className="text-lg font-semibold mb-2">Tenders List</h2>
-//                     <ul>
-//                         {tenders.map((tender, index) => (
-//                             <li key={index} onClick={() => handleSelectTender(index)} className="cursor-pointer mb-2">
-//                                 {tender.name}
-//                             </li>
-//                         ))}
-//                     </ul>
-//                     {selectedTender && (
-//                         <div>
-//                             <h3 className="text-lg font-semibold mb-2">Selected Tender:</h3>
-//                             <p>Name: {selectedTender.name}</p>
-//                             <p>Description: {selectedTender.description}</p>
-//                             <p>Last Date to Apply: {selectedTender.lastDate}</p>
-//                             <button
-//                                 className="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-lg"
-//                                 onClick={handleUpdateTender}
-//                             >
-//                                 Update Tender
-//                             </button>
-//                             <button
-//                                 className="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-lg ml-2"
-//                                 onClick={handleDeleteTender}
-//                             >
-//                                 Delete Tender
-//                             </button>
-//                         </div>
-//                     )}
-//                 </div>
-//             </div>
-//         </AdminLayout>
-//     );
-// };
-
-// export default AdminTenders;
-
-
-////////////////////////////////////////
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AdminLayout from '../../components/adminlayout';
-import TenderForm from '../../components/tenderform'; // Import the tender form component
+import AddTenderForm from '../../components/tenderform'; // Import the add tender form component
 
 const AdminTenders = () => {
-    const [showForm, setShowForm] = useState(false); // State to manage whether to show the tender form
-    const [tenders, setTenders] = useState([]);
-    const [selectedTender, setSelectedTender] = useState(null);
+  const [showAddDialog, setShowAddDialog] = useState(false); // State to manage whether to show the add tender dialog
+//   const [showAddForm, setShowAddForm] = useState(false); // State to manage whether to show the add tender form
+  const [tenders, setTenders] = useState([]);
+  const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
 
-    const handleAddTender = (newTender) => {
-        setTenders([...tenders, newTender]);
-        setShowForm(false); // Hide the form after adding the tender
+  useEffect(() => {
+    // Fetch tenders from the API
+    const fetchTenders = async () => {
+      try {
+        const res = await fetch("/api"); // Assuming the API endpoint is '/api/tenders'
+        if (!res.ok) {
+          throw new Error("Failed to fetch tenders");
+        }
+        const data = await res.json();
+        setTenders(data);
+      } catch (error) {
+        console.error("Error fetching tenders:", error);
+      }
     };
 
-    const handleSelectTender = (tender) => {
-        setSelectedTender(tender);
-    };
+    fetchTenders();
+  }, []);
 
-    return (
-        <AdminLayout>
-            <div className="container mx-auto px-4 py-8 sm:px-2 lg:px-8">
-                <div className="flex flex-col md:flex-row">
-                    <div className="w-full md:w-1/2 md:pr-4">
-                        <div className="mb-8">
-                            <h1 className="text-2xl font-bold mb-4">Tenders List</h1>
-                            <ul>
-                                {tenders.map((tender, index) => (
-                                    <li key={index} onClick={() => handleSelectTender(tender)} className="cursor-pointer mb-2">
-                                        {tender.name}
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                        <button 
-                            className="bg-blue-500 hover:bg-blue-600 text-white font-semibold px-4 py-2 rounded-lg"
-                            onClick={() => setShowForm(true)}
-                        >
-                            Add Tender
+  const handleAddTender = (newTender) => {
+    // Logic to add the new tender
+    console.log("Added tender:", newTender);
+    // setShowAddForm(false); // Hide the add tender form
+    setShowAddDialog(false); // Hide the add tender dialog
+  };
+
+  const handleUpdateTender = (tenderId) => {
+    // Logic to update the selected tender
+    console.log("Updated tender:", tenderId);
+  };
+
+  const handleDeleteTender = (tenderId) => {
+    // Logic to delete the selected tender
+    console.log("Deleted tender:", tenderId);
+  };
+
+  const toggleDescription = (tenderId) => {
+    setExpandedDescriptionId((prevId) => (prevId === tenderId ? null : tenderId));
+  };
+
+  return (
+    <AdminLayout>
+      <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        {/* Top row with buttons */}
+        <div className="flex items-center justify-between mb-4">
+          <h1 className="text-2xl font-bold">Tenders</h1>
+          <button
+            className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded-lg mr-2"
+            onClick={() => setShowAddDialog(true)}
+          >
+            Add Tender
+          </button>
+        </div>
+        {/* Add tender dialog */}
+        {showAddDialog && (
+            <AddTenderForm
+            onSubmit={handleAddTender}
+            onCancel={() => setShowAddDialog(false)}
+            />
+        )}
+        {/* List of tenders */}
+        <div className="overflow-x-12">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Tender Name
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Short Description
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Created Date
+                </th>
+                <th
+                  scope="col"
+                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                >
+                  Actions
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {tenders.map((tender) => (
+                <tr key={tender.id}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-gray-900">
+                      {tender.name}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-500">
+                      {expandedDescriptionId === tender.id ? tender.description : `${tender.description.substring(0, 50)}${tender.description.length > 50 ? '...' : ''}`}
+                      {tender.description.length > 50 && (
+                        <button className="text-blue-500 hover:underline focus:outline-none" onClick={() => toggleDescription(tender.id)}>
+                          {expandedDescriptionId === tender.id ? 'Show less' : 'Show more'}
                         </button>
+                      )}
                     </div>
-                    <div className="w-full md:w-1/2 md:pl-4">
-                        {showForm && <TenderForm onSubmit={handleAddTender} onCancel={() => setShowForm(false)} />}
-                        {selectedTender && (
-                            <div>
-                                <h3 className="text-lg font-semibold mb-2">Selected Tender:</h3>
-                                <p>Name: {selectedTender.name}</p>
-                                <p>Description: {selectedTender.description}</p>
-                                <p>Last Date to Apply: {selectedTender.lastDate}</p>
-                            </div>
-                        )}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-500">
+                      {tender.createdDate}
                     </div>
-                </div>
-            </div>
-        </AdminLayout>
-    );
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                    <div className="relative inline-block text-left">
+                      {/* Hoverable ellipsis */}
+                      <div className="relative inline-block text-left">
+                        <svg
+                          className="w-5 h-5 cursor-pointer text-gray-500"
+                          xmlns="http://www.w3.org/2000/svg"
+                          viewBox="0 0 20 20"
+                          fill="currentColor"
+                          onClick={(e) =>
+                            e.currentTarget.nextSibling.classList.toggle(
+                              "hidden"
+                            )
+                          }
+                        >
+                          <path
+                            fillRule="evenodd"
+                            d="M5 9a2 2 0 100-4 2 2 0 000 4zm5 0a2 2 0 100-4 2 2 0 000 4zm5 0a2 2 0 100-4 2 2 0 000 4z"
+                            clipRule="evenodd"
+                          />
+                        </svg>
+                        {/* Dropdown menu */}
+                        <div className="absolute right-0 w-48 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden">
+                          <div className="py-1">
+                            <button
+                              onClick={() =>
+                                handleUpdateTender(tender.id)
+                              }
+                              className="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
+                            >
+                              Update
+                            </button>
+                            <button
+                              onClick={() =>
+                                handleDeleteTender(tender.id)
+                              }
+                              className="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
+                            >
+                              Delete
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        {/* Add tender form */}
+        {/* {showAddForm && (
+          <AddTenderForm
+            onSubmit={handleAddTender}
+            onCancel={() => setShowAddForm(false)}
+          />
+        )} */}
+      </div>
+    </AdminLayout>
+  );
 };
 
 export default AdminTenders;
