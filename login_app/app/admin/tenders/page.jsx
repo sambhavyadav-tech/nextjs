@@ -52,23 +52,6 @@ const AdminTenders = () => {
   return (
     <AdminLayout>
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        {/* Top row with buttons */}
-        <div className="flex items-center justify-between mb-4">
-          <h1 className="text-2xl font-bold">Tenders</h1>
-          <button
-            className="bg-green-500 hover:bg-green-600 text-white font-semibold px-4 py-2 rounded-lg mr-2"
-            onClick={() => setShowAddDialog(true)}
-          >
-            Add Tender
-          </button>
-        </div>
-        {/* Add tender dialog */}
-        {showAddDialog && (
-            <AddTenderForm
-            onSubmit={handleAddTender}
-            onCancel={() => setShowAddDialog(false)}
-            />
-        )}
         {/* List of tenders */}
         <div className="overflow-x-12">
           <table className="min-w-full divide-y divide-gray-200">

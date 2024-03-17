@@ -17,9 +17,9 @@ const AdminLayout = ({ children }) => {
                 <div className="flex justify-between items-center w-full">
                     <div>
                         {/* <Link href="/admin" className="text-xl font-bold"> Home </Link> */}
-                        <Link href="/admin/applications" className="text-xl ml-4 font-bold">Show Applications </Link>
-                        <Link href="/admin/tenders" className="text-xl ml-4 font-bold"> Show Tenders </Link>
-                        <Link href="/admin/addTenders" className="text-xl ml-4 font-bold"> Add Tenders </Link>
+                        <Link href="/admin/applications" className="text-xl ml-4">Show Applications </Link>
+                        <Link href="/admin/tenders" className="text-xl ml-4"> Show Tenders </Link>
+                        <Link href="/admin/addTenders" className="text-xl ml-4"> Add Tenders </Link>
                     </div>
 
                     <button className="relative right-4 px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg" onClick={() => logout()}>
