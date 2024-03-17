@@ -22,7 +22,7 @@ const AdminLayout = ({ children }) => {
                         <Link href="/admin/addTenders" className="text-xl ml-4 font-bold"> Add Tenders </Link>
                     </div>
 
-                    <button className="relative top-3 right-4 px-4 py-2 mb-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg" onClick={() => logout()}>
+                    <button className="relative right-4 px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg" onClick={() => logout()}>
                         Logout
                     </button>
                 </div>
