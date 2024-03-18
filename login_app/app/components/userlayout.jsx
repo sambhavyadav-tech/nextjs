@@ -5,17 +5,11 @@ import { useState } from 'react';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-const AdminLayout = ({ children }) => {
+const UserLayout = ({ children }) => {
   const router = useRouter();
   const logout = () => {
     // Implement logout logic here (e.g., remove authentication token, clear session)
     router.push("/login");
-  };
-
-  const [showUserDropdown, setShowUserDropdown] = useState(false);
-
-  const toggleUserDropdown = () => {
-      setShowUserDropdown(prevState => !prevState);
   };
 
   return (
@@ -27,7 +21,7 @@ const AdminLayout = ({ children }) => {
           <img
             src="../../Gold.svg"
             alt="Logo"
-            className="w-100 h-100 mr-2 p-2"
+            className="w-60 h-30 mx-4"
           />
           {/* <h1 className="text-xl font-bold mx-auto">Company</h1> */}
         </div>
@@ -35,53 +29,24 @@ const AdminLayout = ({ children }) => {
         {/* Navigation Links */}
         <ul className="space-y-2">
           <li>
-            <Link href="/admin" className="text-lg">
+            <Link href="/user" className="text-lg">
               Home
             </Link>
           </li>
           <li>
-            <Link href="/admin/applications" className="text-lg">
-              View Applications
+            <Link href="/user/applications" className="text-lg">
+              Applications
             </Link>
           </li>
           <li>
-            <Link href="/admin/tenders" className="text-lg">
-              View Tenders
+            <Link href="/user/tenders" className="text-lg">
+              Apply Tenders
             </Link>
           </li>
           <li>
-            <Link href="/admin/addTenders" className="text-lg">
-              Add Tenders
+            <Link href="/user/profile" className="text-lg">
+              Update profile
             </Link>
-          </li>
-
-          <li>
-            {/* User dropdown */}
-            <div className="relative">
-              <button
-                onClick={toggleUserDropdown}
-                className="text-lg block hover:text-gray-300 focus:outline-none"
-              >
-                Users
-              </button>
-              {/* User dropdown content */}
-              {showUserDropdown && (
-                <div className="absolute left-0 mt-2 py-2 w-40 bg-white rounded-lg shadow-md">
-                  <a
-                    href="/admin/addUser"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    Add User
-                  </a>
-                  <a
-                    href="/admin/userList"
-                    className="block px-4 py-2 text-gray-800 hover:bg-gray-200"
-                  >
-                    User List
-                  </a>
-                </div>
-              )}
-            </div>
           </li>
         </ul>
 
@@ -118,4 +83,4 @@ const AdminLayout = ({ children }) => {
   );
 };
 
-export default AdminLayout;
+export default UserLayout;

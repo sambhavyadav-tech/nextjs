@@ -2,7 +2,7 @@
 'use client'
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import AdminLayout from '../components/adminlayout';
+import UserLayout from '../components/userlayout';
 
 const Admin = () => {
     const router = useRouter();
@@ -22,14 +22,14 @@ const Admin = () => {
     }, []);
 
     return (
-        <AdminLayout>
+        <UserLayout>
             <div className="container mx-auto max-w-md mt-20">
                 <h2 className="text-2xl font-bold mb-6">User Page</h2>
                 <p>Welcome to the user page!</p>
                 {/* <p>logout here</p>
                 <button type="button" onClick={() => logout()} className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg">Logout</button> */}
             </div>
-        </AdminLayout>
+        </UserLayout>
     );
 };
 
