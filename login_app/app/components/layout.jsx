@@ -35,17 +35,17 @@ const Layout = ({ children }) => {
         {/* Navigation Links */}
         <ul className="space-y-2 items-end">
           <li>
-            <Link href="/admin" className="text-lg">
+            <Link href="#" className="text-lg">
               Home
             </Link>
           </li>
           <li>
-            <Link href="/admin/applications" className="text-lg">
+            <Link href="#" className="text-lg">
               About
             </Link>
           </li>
           <li>
-            <Link href="/admin/tenders" className="text-lg">
+            <Link href="#" className="text-lg">
               Contact Us
             </Link>
           </li>
