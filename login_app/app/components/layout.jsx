@@ -57,7 +57,7 @@ const Layout = ({ children }) => {
         {/* Navbar */}
         <nav className="bg-gray-800 text-white py-4 px-4 mb-2 flex justify-between items-center">
           <div className="flex-grow flex justify-center">
-            <h1 className="text-xl font-bold">Company</h1>
+            <h1 className="text-xl font-bold">The Ballard Pier, Tenders</h1>
           </div>
         </nav>
 

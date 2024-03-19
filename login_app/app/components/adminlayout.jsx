@@ -27,7 +27,7 @@ const AdminLayout = ({ children }) => {
           <img
             src="../../Gold.svg"
             alt="Logo"
-            className="w-100 h-100 mr-2 p-2"
+            className="w-70 h-70 mr-3 p-3"
           />
           {/* <h1 className="text-xl font-bold mx-auto">Company</h1> */}
         </div>
@@ -99,7 +99,7 @@ const AdminLayout = ({ children }) => {
         {/* Navbar */}
         <nav className="bg-gray-800 text-white py-4 px-4 mb-2 flex justify-between items-center">
           <div className="flex-grow flex justify-center">
-            <h1 className="text-xl font-bold">Company</h1>
+            <h1 className="text-xl font-bold">Welcome, The Ballard Pier Pvt. Ltd.</h1>
           </div>
           <div>
             <button
