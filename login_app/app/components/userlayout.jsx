@@ -21,7 +21,7 @@ const UserLayout = ({ children }) => {
           <img
             src="../../Gold.svg"
             alt="Logo"
-            className="w-60 h-30 mx-4"
+            className="w-30 h-20 mx-4"
           />
           {/* <h1 className="text-xl font-bold mx-auto">Company</h1> */}
         </div>

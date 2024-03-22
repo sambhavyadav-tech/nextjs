@@ -1,5 +1,7 @@
 // components/adminLayout.js
 
+"use client"
+
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
@@ -25,7 +27,7 @@ const Layout = ({ children }) => {
         {/* Logo */}
         <div className="flex items-center mb-8">
           <img
-            src="../../Gold.svg"
+            src="../../Blacky.svg"
             alt="Logo"
             className="w-100 h-100 mr-2 p-2"
           />
@@ -53,16 +55,16 @@ const Layout = ({ children }) => {
       </nav>
 
       {/* Main Content */}
-      <div className="ml-64 flex-1">
+      <div className="ml-64 flex-1 bg-white p-3 rounded-lg shadow-md w-1/2 justify-center overflow-hidden mx-auto">
         {/* Navbar */}
         <nav className="bg-gray-800 text-white py-4 px-4 mb-2 flex justify-between items-center">
           <div className="flex-grow flex justify-center">
-            <h1 className="text-xl font-bold">The Ballard Pier, Tenders</h1>
+            <h1 className="text-xl font-bold">Tender Management System</h1>
           </div>
         </nav>
 
         {/* Main Content Area */}
-        <main className="p-4">{children}</main>
+        <main className="p-4  min-h-screen overflow-auto">{children}</main>
       </div>
     </div>
   );

@@ -2,78 +2,40 @@ import { NextResponse } from 'next/server'
  
 // Sample data for tenders
 const tendersData = [
+ 
   {
     id: 1,
-    name: "Tender 1",
-    description: "Description of tender 1 DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionvDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription ",
-    createdDate: "2022-03-25",
+    title: "Tender for Transport",
+    description: "Tender for Transport",
+    publishdate:"21-05-2024",
+    closingdate: "30-06-2024",
+    tenderstatus:"Open",
+    category:"Transport",
+    documents:"document"
   },
   {
     id: 2,
-    name: "Tender 2",
-    description: "Description of tender 2",
-    createdDate: "2022-03-26",
+    title: "Tender for Ground Handling ",
+    description: "Tender for Transport",
+    publishdate:"21-05-2024",
+    closingdate: "30-06-2024",
+    tenderstatus:"Awarded",
+    category:"Ground Handling",
+    documents:"document"
   },
+
   {
-    id: 1,
-    name: "Tender 1",
-    description: "Description of tender 1 DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionvDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription ",
-    createdDate: "2022-03-25",
+    id: 3,
+    title: "Tender for Parking Management",
+    description: "Tender for Transport",
+    publishdate:"21-05-2024",
+    closingdate: "30-06-2024",
+    tenderstatus:"Under Evaluation",
+    category:"Parking",
+    documents:"document"
   },
-  {
-    id: 2,
-    name: "Tender 2",
-    description: "Description of tender 2",
-    createdDate: "2022-03-26",
-  },
-  {
-    id: 1,
-    name: "Tender 1",
-    description: "Description of tender 1 DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionvDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription ",
-    createdDate: "2022-03-25",
-  },
-  {
-    id: 2,
-    name: "Tender 2",
-    description: "Description of tender 2",
-    createdDate: "2022-03-26",
-  },
-  {
-    id: 1,
-    name: "Tender 1",
-    description: "Description of tender 1 DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionvDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription ",
-    createdDate: "2022-03-25",
-  },
-  {
-    id: 2,
-    name: "Tender 2",
-    description: "Description of tender 2",
-    createdDate: "2022-03-26",
-  },
-  {
-    id: 1,
-    name: "Tender 1",
-    description: "Description of tender 1 DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionvDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription ",
-    createdDate: "2022-03-25",
-  },
-  {
-    id: 2,
-    name: "Tender 2",
-    description: "Description of tender 2",
-    createdDate: "2022-03-26",
-  },
-  {
-    id: 1,
-    name: "Tender 1",
-    description: "Description of tender 1 DescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionvDescriptionDescriptionDescriptionDescriptionDescriptionDescriptionDescription ",
-    createdDate: "2022-03-25",
-  },
-  {
-    id: 2,
-    name: "Tender 2",
-    description: "Description of tender 2",
-    createdDate: "2022-03-26",
-  },
+  
+ 
   // Add more sample tenders if needed
 ];
 

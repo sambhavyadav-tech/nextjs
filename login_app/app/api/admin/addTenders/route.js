@@ -4,15 +4,31 @@
 const tendersData = [
   {
     id: 1,
-    name: "Tender 1",
-    description: "Description of tender 1",
-    createdDate: "2022-03-25",
+    title: "Tender for Transport",
+    publishdate:"21-05-2024",
+    closingdate: "30-06-2024",
+    tenderstatus:"Open",
+    category:"Transport",
+    documents:"document"
   },
   {
     id: 2,
-    name: "Tender 2",
-    description: "Description of tender 2",
-    createdDate: "2022-03-26",
+    title: "Tender for Ground Handling ",
+    publishdate:"21-05-2024",
+    closingdate: "30-06-2024",
+    tenderstatus:"Awarded",
+    category:"Ground Handling",
+    documents:"document"
+  },
+
+  {
+    id: 3,
+    title: "Tender for Parking Management",
+    publishdate:"21-05-2024",
+    closingdate: "30-06-2024",
+    tenderstatus:"Under Evaluation",
+    category:"Parking",
+    documents:"document"
   },
   // Add more sample tenders if needed
 ];

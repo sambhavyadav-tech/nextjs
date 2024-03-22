@@ -52,118 +52,70 @@ const AdminTenders = () => {
   return (
     <AdminLayout>
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        {/* List of tenders */}
-        <div className="overflow-x-12">
+        <div className="overflow-x-auto">
           <table className="min-w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Tender Name
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Short Description
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Created Date
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Actions
-                </th>
+                {/* Adjusting with responsive utilities */}
+                <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-3">Tender ID</th>
+                <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-3">Tender Title</th>
+                <th className="hidden md:table-cell px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tender Description</th>
+                {/* Other headers */}
+                <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-3">Published Date</th>
+                <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-3">Closing Date</th>
+                <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-3">Tender Status</th>
+                <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-3">Category/Type</th>
+                <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-3">Documents</th>
+                <th className="px-2 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider sm:px-3">Actions</th>
               </tr>
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {tenders.map((tender) => (
                 <tr key={tender.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
-                      {tender.name}
-                    </div>
+                  {/* Tender data cells */}
+                  <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900 sm:px-3">{tender.id}</td>
+                  <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900 sm:px-3">{tender.title}</td>
+                  {/* Description with show more/less toggle */}
+                  <td className="hidden md:table-cell px-2 py-4 whitespace-nowrap text-sm text-gray-500">
+                    {expandedDescriptionId === tender.id ? tender.description : `${tender.description.substring(0, 50)}${tender.description.length > 50 ? '...' : ''}`}
+                    {tender.description.length > 50 && (
+                      <button className="text-blue-500 hover:underline focus:outline-none" onClick={() => toggleDescription(tender.id)}>
+                        {expandedDescriptionId === tender.id ? 'Show less' : 'Show more'}
+                      </button>
+                    )}
                   </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">
-                      {expandedDescriptionId === tender.id ? tender.description : `${tender.description.substring(0, 50)}${tender.description.length > 50 ? '...' : ''}`}
-                      {tender.description.length > 50 && (
-                        <button className="text-blue-500 hover:underline focus:outline-none" onClick={() => toggleDescription(tender.id)}>
-                          {expandedDescriptionId === tender.id ? 'Show less' : 'Show more'}
-                        </button>
-                      )}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">
-                      {tender.createdDate}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <div className="relative inline-block text-left">
-                      {/* Hoverable ellipsis */}
-                      <div className="relative inline-block text-left">
-                        <svg
-                          className="w-5 h-5 cursor-pointer text-gray-500"
-                          xmlns="http://www.w3.org/2000/svg"
-                          viewBox="0 0 20 20"
-                          fill="currentColor"
-                          onClick={(e) =>
-                            e.currentTarget.nextSibling.classList.toggle(
-                              "hidden"
-                            )
-                          }
-                        >
-                          <path
-                            fillRule="evenodd"
-                            d="M5 9a2 2 0 100-4 2 2 0 000 4zm5 0a2 2 0 100-4 2 2 0 000 4zm5 0a2 2 0 100-4 2 2 0 000 4z"
-                            clipRule="evenodd"
-                          />
-                        </svg>
-                        {/* Dropdown menu */}
-                        <div className="absolute right-0 w-48 mt-2 origin-top-right bg-white divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none hidden">
-                          <div className="py-1">
-                            <button
-                              onClick={() =>
-                                handleUpdateTender(tender.id)
-                              }
-                              className="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
-                            >
-                              Update
-                            </button>
-                            <button
-                              onClick={() =>
-                                handleDeleteTender(tender.id)
-                              }
-                              className="block px-4 py-2 text-sm text-gray-700 w-full text-left hover:bg-gray-100"
-                            >
-                              Delete
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        {/* Add tender form */}
-        {/* {showAddForm && (
-          <AddTenderForm
-            onSubmit={handleAddTender}
-            onCancel={() => setShowAddForm(false)}
-          />
-        )} */}
-      </div>
+                  {/* Other cells */}
+                  <td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.publishdate}</td>
+<td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.closingdate}</td>
+<td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.tenderstatus}</td>
+<td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.category}</td>
+<td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">
+<div className="flex items-center justify-center">
+{tender.documents ? 'Available' : 'N/A'}
+</div>
+</td>
+<td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">
+<div className="flex items-center justify-center space-x-2">
+<button
+onClick={() => handleUpdateTender(tender.id)}
+className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-700 focus:outline-none"
+>
+Update
+</button>
+<button
+onClick={() => handleDeleteTender(tender.id)}
+className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-700 focus:outline-none"
+>
+Delete
+</button>
+</div>
+</td>
+</tr>
+))}
+</tbody>
+</table>
+</div>
+</div>
     </AdminLayout>
   );
 };
