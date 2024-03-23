@@ -1,6 +1,8 @@
 // pages/api/tenders.js
 
 // Sample data for tenders
+
+/*
 const tendersData = [
   {
     id: 1,
@@ -33,6 +35,7 @@ const tendersData = [
   // Add more sample tenders if needed
 ];
 
+
 export default function handler(req, res) {
   if (req.method === "GET") {
     // Return tenders data as JSON response
@@ -43,3 +46,36 @@ export default function handler(req, res) {
     res.status(405).end(`Method ${req.method} Not Allowed`);
   }
 }
+*/
+
+
+
+import { NextResponse } from "next/server";
+import connectMongoDB from "..//..//..//..//libs/mongodb"
+import TenderModal from "../..//..//..//models/tenders";
+
+
+export async function POST(request)
+{
+const { id, title,publishdate,closingdate,tenderstatus,category,documents}= await request.json();
+await connectMongoDB();
+
+await TenderModal.c
+await TenderModal.create({id, title,publishdate,closingdate,tenderstatus,category,documents});
+return NextResponse.json({message:"Tender created by Post"},{status: 201});
+
+
+}
+
+export async function GET() {
+await connectMongoDB();
+const tenderlist = await TenderModal.find();
+return NextResponse.json({ tenderlist });
+}
+
+export async function DELETE(request) {
+const id = request.nextUrl.searchParams.get("id");
+await connectMongoDB();
+await Topic.findByIdAndDelete(id);
+return NextResponse.json({ message: "Topic deleted" }, { status: 200 });
+  }
