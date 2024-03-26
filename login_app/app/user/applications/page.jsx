@@ -6,7 +6,14 @@ import UserLayout from "../../components/userlayout";
 const Applications = () => {
   // Hardcoded application data
   const applications = [
-    { id: 1, name: "Tender for Water Supply", tenderid: "t01", applicationid:"t01_123", email: "john@example.com", status: "Pending" },
+    {
+      id: 1,
+      name: "Tender for Water Supply",
+      tenderid: "t01",
+      applicationid: "t01_123",
+      email: "john@example.com",
+      status: "Pending",
+    },
     {
       id: 2,
       name: "Tender for Waste Management",
@@ -19,7 +26,6 @@ const Applications = () => {
       email: "michael@example.com",
       status: "Rejected",
     },
-   
   ];
 
   return (

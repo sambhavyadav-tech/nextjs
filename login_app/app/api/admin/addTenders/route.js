@@ -57,11 +57,10 @@ import TenderModal from "../..//..//..//models/tenders";
 
 export async function POST(request)
 {
-const { id, title,publishdate,closingdate,tenderstatus,category,documents}= await request.json();
+const { title,publishdate,closingdate,tenderstatus,category,documents}= await request.json();
 await connectMongoDB();
 
-await TenderModal.c
-await TenderModal.create({id, title,publishdate,closingdate,tenderstatus,category,documents});
+await TenderModal.create({title,publishdate,closingdate,tenderstatus,category,documents});
 return NextResponse.json({message:"Tender created by Post"},{status: 201});
 
 

@@ -1,9 +1,9 @@
 // components/adminLayout.js
-
-import React from "react";
+import React, { Component } from "react";
 import { useState } from 'react';
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import Footer from './footer';
 
 const AdminLayout = ({ children }) => {
   const router = useRouter();
@@ -115,8 +115,10 @@ const AdminLayout = ({ children }) => {
 
         {/* Main Content Area */}
         <main className="p-4">{children}</main>
+        <Footer/>
       </div>
     </div>
+    
   );
 };
 

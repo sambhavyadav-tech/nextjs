@@ -2,7 +2,6 @@ import mongoose, {Schema} from "mongoose";
 const tenders = new Schema(
  
 {
-    id: String,
     title: String,
     publishdate:String,
     closingdate: String,

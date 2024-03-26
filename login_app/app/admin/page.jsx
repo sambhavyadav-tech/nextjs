@@ -25,7 +25,7 @@ const Admin = () => {
 
   return (
     <AdminLayout>
-      <div className="container mx-auto text-center max-w-100 mt-20">
+      <div className="flex flex-col min-h-screen">
         <div className="flex justify-between">
           <div className="bg-white p-4 rounded-lg shadow-md flex-grow mr-4">
             <h2 className="text-lg font-semibold mb-4">Total Tenders</h2>
