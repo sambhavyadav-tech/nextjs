@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from "react";
 
 const TenderForm = ({ onSubmit, onCancel }) => {
@@ -19,11 +21,37 @@ const TenderForm = ({ onSubmit, onCancel }) => {
       [name]: value,
     }));
   };
+  const onSubmit1 = (e) => {
+    console.log("Hello !");
+  };
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(newTender);
-    alert("Tender submission successful"); // Popup message
+    // Use fetch to submit the form data to your API endpoint
+    try {
+      const response = await fetch("/api/tenders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(newTender),
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert("Tender submission successful");
+        // Optionally reset the form or redirect the user
+      } else {
+        // Handle server errors or invalid responses
+        alert("Failed to submit tender. Please try again.");
+      }
+    } catch (error) {
+      // Handle network errors or issues with the fetch call
+      console.error("Error submitting form:", error);
+      alert(
+        "Error submitting the form. Please check your connection and try again."
+      );
+    }
   };
 
   return (
@@ -142,6 +170,7 @@ const TenderForm = ({ onSubmit, onCancel }) => {
             Cancel
           </button>
         </div>
+        <footer />
       </form>
     </div>
   );

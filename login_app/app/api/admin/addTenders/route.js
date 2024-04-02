@@ -1,74 +1,44 @@
-// pages/api/tenders.js
+const express = require("express");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 
-// Sample data for tenders
+// Replace with your actual MongoDB connection string
+const MONGO_URI = "mongodb://localhost:27017/your_database_name";
 
-/*
-const tendersData = [
-  {
-    id: 1,
-    title: "Tender for Transport",
-    publishdate:"21-05-2024",
-    closingdate: "30-06-2024",
-    tenderstatus:"Open",
-    category:"Transport",
-    documents:"document"
-  },
-  {
-    id: 2,
-    title: "Tender for Ground Handling ",
-    publishdate:"21-05-2024",
-    closingdate: "30-06-2024",
-    tenderstatus:"Awarded",
-    category:"Ground Handling",
-    documents:"document"
-  },
+const app = express();
+app.use(cors());
+app.use(bodyParser.json());
 
-  {
-    id: 3,
-    title: "Tender for Parking Management",
-    publishdate:"21-05-2024",
-    closingdate: "30-06-2024",
-    tenderstatus:"Under Evaluation",
-    category:"Parking",
-    documents:"document"
-  },
-  // Add more sample tenders if needed
-];
+// Define your Tender schema (replace with your desired schema)
+const TenderSchema = new mongoose.Schema({
+  Tender_title: String,
+  Tender_description: String,
+  publish_date: Date,
+  closing_date: Date,
+  Tender_status: String,
+  category: String,
+  Tender_documents: [String], // Array to store document paths
+});
 
+const Tender = mongoose.model("Tender", TenderSchema);
 
-export default function handler(req, res) {
-  if (req.method === "GET") {
-    // Return tenders data as JSON response
-    res.status(200).json(tendersData);
-  } else {
-    // Handle other HTTP methods if needed
-    res.setHeader("Allow", ["GET"]);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
+// Connect to MongoDB
+mongoose
+  .connect(MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(() => console.log("Connected to MongoDB"))
+  .catch((error) => console.error("Error connecting to MongoDB:", error));
+
+// POST endpoint to handle form submission
+app.post("/", async (req, res) => {
+  const newTender = new Tender(req.body);
+  try {
+    const savedTender = await newTender.save();
+    res.status(201).json(savedTender); // Send created tender data
+  } catch (error) {
+    console.error("Error saving tender:", error);
+    res.status(500).json({ message: "Failed to save tender" });
   }
-}
-*/
+});
 
-
-// Adjust the import paths as per your project structure
-import connectMongoDB from '../../../libs/mongodb';
-import TenderModel from '../../../models/tenders';
-
-export default async function handler(req, res) {
-  await connectMongoDB();
-
-  if (req.method === 'POST') {
-    const { title, publishdate, closingdate, tenderstatus, category, documents } = req.body;
-    await TenderModel.create({ title, publishdate, closingdate, tenderstatus, category, documents });
-    res.status(201).json({ message: "Tender created" });
-  } else if (req.method === 'GET') {
-    const tenderlist = await TenderModel.find();
-    res.status(200).json({ tenderlist });
-  } else if (req.method === 'DELETE') {
-    const { id } = req.query; // Adjust based on how you're passing the ID
-    await TenderModel.findByIdAndDelete(id);
-    res.status(200).json({ message: "Tender deleted" });
-  } else {
-    res.setHeader('Allow', ['GET', 'POST', 'DELETE']);
-    res.status(405).end(`Method ${req.method} Not Allowed`);
-  }
-}
+module.exports = app; // Export the app for use in Next.js API routes

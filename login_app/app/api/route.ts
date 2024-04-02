@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
  
 // Sample data for tenders
-/*
+
 const tendersData = [
  
   {
@@ -48,4 +48,3 @@ const tendersData = [
 export async function GET(request: Request) {
   return NextResponse.json(tendersData);
 }
-*/

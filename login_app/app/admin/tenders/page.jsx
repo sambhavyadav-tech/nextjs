@@ -52,7 +52,10 @@ const AdminTenders = () => {
 
   return (
     <AdminLayout>
-      <div style={{ minHeight: "400px" }}>
+      <div
+        className="flex flex-col min-h-screen "
+        style={{ minHeight: "500px" }}
+      >
         <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8 ">
           <div className="overflow-x-auto">
             <table className="min-w-full divide-y divide-gray-200">
@@ -157,20 +160,6 @@ const AdminTenders = () => {
             </table>
           </div>
         </div>
-
-        {/* <div>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aut deleniti
-          tempore itaque voluptas aspernatur adipisci quisquam possimus tenetur,
-          iure unde nisi. Quia fugit saepe fuga, necessitatibus harum, ut minus
-          dolorem alias quaerat laboriosam deleniti nisi! Quae libero nam alias
-          minima consectetur, voluptatem asperiores consequatur obcaecati ea
-          accusantium voluptate quibusdam at temporibus corporis. Ipsa laborum
-          debitis odio, quidem fugit placeat consectetur ut labore quibusdam et.
-          Repellendus molestiae aliquid voluptatibus numquam odio tenetur error
-          nemo quasi cupiditate tempora? Fugiat quas harum, cupiditate in
-          consectetur minima beatae sapiente vel, aut explicabo hic. Cumque et
-          impedit odio explicabo earum in cum voluptatem, libero amet.
-        </div> */}
       </div>
     </AdminLayout>
   );
