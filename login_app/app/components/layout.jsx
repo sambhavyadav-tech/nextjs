@@ -66,6 +66,7 @@ const Layout = ({ children }) => {
         {/* Main Content Area */}
         <main className="p-4  min-h-screen overflow-auto">{children}</main>
       </div>
+      <Footer />
     </div>
   );
 };

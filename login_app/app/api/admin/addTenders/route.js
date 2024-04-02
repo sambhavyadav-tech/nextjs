@@ -49,32 +49,26 @@ export default function handler(req, res) {
 */
 
 
+// Adjust the import paths as per your project structure
+import connectMongoDB from '../../../libs/mongodb';
+import TenderModel from '../../../models/tenders';
 
-import { NextResponse } from "next/server";
-import connectMongoDB from "..//..//..//..//libs/mongodb"
-import TenderModal from "../..//..//..//models/tenders";
+export default async function handler(req, res) {
+  await connectMongoDB();
 
-
-export async function POST(request)
-{
-const { title,publishdate,closingdate,tenderstatus,category,documents}= await request.json();
-await connectMongoDB();
-
-await TenderModal.create({title,publishdate,closingdate,tenderstatus,category,documents});
-return NextResponse.json({message:"Tender created by Post"},{status: 201});
-
-
+  if (req.method === 'POST') {
+    const { title, publishdate, closingdate, tenderstatus, category, documents } = req.body;
+    await TenderModel.create({ title, publishdate, closingdate, tenderstatus, category, documents });
+    res.status(201).json({ message: "Tender created" });
+  } else if (req.method === 'GET') {
+    const tenderlist = await TenderModel.find();
+    res.status(200).json({ tenderlist });
+  } else if (req.method === 'DELETE') {
+    const { id } = req.query; // Adjust based on how you're passing the ID
+    await TenderModel.findByIdAndDelete(id);
+    res.status(200).json({ message: "Tender deleted" });
+  } else {
+    res.setHeader('Allow', ['GET', 'POST', 'DELETE']);
+    res.status(405).end(`Method ${req.method} Not Allowed`);
+  }
 }
-
-export async function GET() {
-await connectMongoDB();
-const tenderlist = await TenderModal.find();
-return NextResponse.json({ tenderlist });
-}
-
-export async function DELETE(request) {
-const id = request.nextUrl.searchParams.get("id");
-await connectMongoDB();
-await Topic.findByIdAndDelete(id);
-return NextResponse.json({ message: "Topic deleted" }, { status: 200 });
-  }

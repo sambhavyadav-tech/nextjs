@@ -1,9 +1,9 @@
 // components/adminLayout.js
 import React, { Component } from "react";
-import { useState } from 'react';
+import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import Footer from './footer';
+import Footer from "./footer";
 
 const AdminLayout = ({ children }) => {
   const router = useRouter();
@@ -15,7 +15,7 @@ const AdminLayout = ({ children }) => {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
 
   const toggleUserDropdown = () => {
-      setShowUserDropdown(prevState => !prevState);
+    setShowUserDropdown((prevState) => !prevState);
   };
 
   return (
@@ -24,11 +24,7 @@ const AdminLayout = ({ children }) => {
       <nav className="bg-gray-800 text-white w-64 py-4 px-4 flex flex-col fixed h-full">
         {/* Logo */}
         <div className="flex items-center mb-8">
-          <img
-            src="../../Gold.svg"
-            alt="Logo"
-            className="w-70 h-70 mr-3 p-3"
-          />
+          <img src="../../Gold.svg" alt="Logo" className="w-70 h-70 mr-3 p-3" />
           {/* <h1 className="text-xl font-bold mx-auto">Company</h1> */}
         </div>
 
@@ -99,26 +95,39 @@ const AdminLayout = ({ children }) => {
         {/* Navbar */}
         <nav className="bg-gray-800 text-white py-4 px-4 mb-2 flex justify-between items-center">
           <div className="flex-grow flex justify-center">
-            <h1 className="text-xl font-bold">Welcome, The Ballard Pier Pvt. Ltd.</h1>
+            <h1 className="text-xl font-bold">
+              Welcome, The Ballard Pier Pvt. Ltd.
+            </h1>
           </div>
           <div>
-          <button class="relative bg-gray-200 p-2 rounded-full hover:bg-gray-300 focus:outline-none focus:ring focus:ring-gray-400">
-  
-  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14V8a6 6 0 10-12 0v6c0 .386-.149.763-.405 1.055L4 17h5m1 0v1a3 3 0 11-6 0v-1m6 0H9" />
-  </svg>
-  
-  <span class="absolute top-0 right-0 inline-flex items-center justify-center h-4 w-4 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white">9</span>
-</button>
+            <button class="relative bg-gray-200 p-2 rounded-full hover:bg-gray-300 focus:outline-none focus:ring focus:ring-gray-400">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-gray-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14V8a6 6 0 10-12 0v6c0 .386-.149.763-.405 1.055L4 17h5m1 0v1a3 3 0 11-6 0v-1m6 0H9"
+                />
+              </svg>
+
+              <span class="absolute top-0 right-0 inline-flex items-center justify-center h-4 w-4 text-xs font-bold text-white bg-red-500 rounded-full border-2 border-white">
+                9
+              </span>
+            </button>
           </div>
         </nav>
 
         {/* Main Content Area */}
         <main className="p-4">{children}</main>
-        <Footer/>
+        <Footer />
       </div>
     </div>
-    
   );
 };
 

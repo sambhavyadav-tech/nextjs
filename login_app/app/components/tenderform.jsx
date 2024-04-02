@@ -130,8 +130,7 @@ const TenderForm = ({ onSubmit, onCancel }) => {
         <div className="flex items-center justify-between">
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
-            type="button"
-            onClick={handleSubmit}
+            type="submit"
           >
             Add Tender
           </button>

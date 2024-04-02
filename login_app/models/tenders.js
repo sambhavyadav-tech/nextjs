@@ -3,6 +3,7 @@ const tenders = new Schema(
  
 {
     title: String,
+    description: String,
     publishdate:String,
     closingdate: String,
     tenderstatus:String,
@@ -15,5 +16,5 @@ const tenders = new Schema(
 
 );
 
-const TenderModal = mongoose.models.TenderModal || mongoose.model("TenderModal",tenders) ;  //creating a model of the user with the UserSchema
- export default TenderModal;
+const TenderModel = mongoose.models.TenderModel || mongoose.model("TenderModel",tenders) ;  //creating a model of the user with the UserSchema
+ export default TenderModel;
