@@ -1,139 +1,158 @@
-
-'use client'
-import React, { useState, useEffect } from 'react';
-import UserLayout from '../../components/userlayout';
-import AddTenderForm from '../../components/tenderform'; // Import the add tender form component
+"use client";
+import React, { useState, useEffect } from "react";
+import UserLayout from "../../components/userlayout";
+import AddTenderForm from "../../components/tenderform"; // Import the add tender form component
 
 const AdminTenders = () => {
   const [showAddDialog, setShowAddDialog] = useState(false); // State to manage whether to show the add tender dialog
-//   const [showAddForm, setShowAddForm] = useState(false); // State to manage whether to show the add tender form
   const [tenders, setTenders] = useState([]);
   const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
 
   useEffect(() => {
-    // Fetch tenders from the API
-    const fetchTenders = async () => {
-      try {
-        const res = await fetch("/api"); // Assuming the API endpoint is '/api/tenders'
-        if (!res.ok) {
-          throw new Error("Failed to fetch tenders");
-        }
-        const data = await res.json();
-        setTenders(data);
-      } catch (error) {
-        console.error("Error fetching tenders:", error);
-      }
-    };
-
-    fetchTenders();
+    // Dummy data for tenders
+    const dummyTenders = [
+      {
+        id: 1,
+        title: "Tender for Water Supply",
+        description:
+          "Description of Water Supply tender Description of Water Supply tenderDescription of Water Supply tenderDescription of Water Supply tender ",
+        publishdate: "2024-04-01",
+        closingdate: "2024-04-15",
+        tenderstatus: "Open",
+        category: "Water Supply",
+        documents: ["document1.pdf", "document2.pdf"],
+      },
+      {
+        id: 2,
+        title: "Tender for Waste Management",
+        description: "Description of Waste Management tender",
+        publishdate: "2024-03-20",
+        closingdate: "2024-04-10",
+        tenderstatus: "Closed",
+        category: "Waste Management",
+        documents: ["document3.pdf"],
+      },
+      {
+        id: 3,
+        title: "Tender for Logistics",
+        description: "Description of Logistics tender",
+        publishdate: "2024-03-15",
+        closingdate: "2024-04-05",
+        tenderstatus: "Rejected",
+        category: "Logistics",
+        documents: ["document4.pdf", "document5.pdf"],
+      },
+      {
+        id: 4,
+        title: "Tender for Water Supply",
+        description: "Description of Water Supply tender",
+        publishdate: "2024-04-01",
+        closingdate: "2024-04-15",
+        tenderstatus: "Open",
+        category: "Water Supply",
+        documents: ["document1.pdf", "document2.pdf"],
+      },
+      {
+        id: 5,
+        title: "Tender for Waste Management",
+        description: "Description of Waste Management tender",
+        publishdate: "2024-03-20",
+        closingdate: "2024-04-10",
+        tenderstatus: "Closed",
+        category: "Waste Management",
+        documents: ["document3.pdf"],
+      },
+      {
+        id: 6,
+        title: "Tender for Logistics",
+        description: "Description of Logistics tender",
+        publishdate: "2024-03-15",
+        closingdate: "2024-04-05",
+        tenderstatus: "Rejected",
+        category: "Logistics",
+        documents: ["document4.pdf", "document5.pdf"],
+      },
+    ];
+    setTenders(dummyTenders);
   }, []);
 
-  const handleAddTender = (newTender) => {
-    // Logic to add the new tender
-    console.log("Added tender:", newTender);
-    // setShowAddForm(false); // Hide the add tender form
-    setShowAddDialog(false); // Hide the add tender dialog
+  const handleApplyTender = (tenderId) => {
+    // Logic to apply for the selected tender
+    console.log("Applied for tender:", tenderId);
   };
-
-  const handleUpdateTender = (tenderId) => {
-    // Logic to update the selected tender
-    console.log("Updated tender:", tenderId);
-  };
-
-  const handleDeleteTender = (tenderId) => {
-    // Logic to delete the selected tender
-    console.log("Deleted tender:", tenderId);
-  };
-
-  const toggleDescription = (tenderId) => {
-    setExpandedDescriptionId((prevId) => (prevId === tenderId ? null : tenderId));
+  const toggleDescription = (id) => {
+    if (expandedDescriptionId === id) {
+      setExpandedDescriptionId(null);
+    } else {
+      setExpandedDescriptionId(id);
+    }
   };
 
   return (
     <UserLayout>
       <div className="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        {/* List of tenders */}
-        <div className="overflow-x-12">
-          <table className="min-w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Tender Name
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Short Description
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Created Date
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Actions
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {tenders.map((tender) => (
-                <tr key={tender.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm font-medium text-gray-900">
-                      {tender.name}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">
-                      {expandedDescriptionId === tender.id ? tender.description : `${tender.description.substring(0, 50)}${tender.description.length > 50 ? '...' : ''}`}
-                      {tender.description.length > 50 && (
-                        <button className="text-blue-500 hover:underline focus:outline-none" onClick={() => toggleDescription(tender.id)}>
-                          {expandedDescriptionId === tender.id ? 'Show less' : 'Show more'}
-                        </button>
-                      )}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <div className="text-sm text-gray-500">
-                      {tender.createdDate}
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                    <div className="relative inline-block text-left">
-                      {/* Apply Button */}
-                      <button
-                      onClick={() => handleApplyTender(tender.id)}
-                      className="px-4 py-2 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 focus:outline-none"
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {tenders.map((tender) => (
+            <div
+              key={tender.id}
+              className="bg-white shadow-md rounded-lg p-4 flex flex-col justify-between"
+            >
+              <div>
+                <h2 className="text-xl font-bold mb-2">{tender.title}</h2>
+                <p className="text-gray-600">
+                  Description:{" "}
+                  {expandedDescriptionId === tender.id
+                    ? tender.description
+                    : `${tender.description.substring(0, 100)}...`}
+                  {tender.description.length > 30 && (
+                    <button
+                      onClick={() => toggleDescription(tender.id)}
+                      className="text-blue-500 hover:text-blue-600 ml-2"
                     >
-                      Apply
+                      {expandedDescriptionId === tender.id
+                        ? "View Less"
+                        : "View More"}
                     </button>
-                     
-                    </div>
-                    
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  )}
+                </p>
+                <p className="text-gray-500 mt-2">
+                  Publish Date: {tender.publishdate}
+                </p>
+                <p className="text-gray-500">
+                  Closing Date: {tender.closingdate}
+                </p>
+                <p className="text-gray-500">
+                  Tender Status: {tender.tenderstatus}
+                </p>
+                <p className="text-gray-500">Category: {tender.category}</p>
+                {tender.documents && tender.documents.length > 0 && (
+                  <div>
+                    <p className="text-gray-500 mt-2">Documents:</p>
+                    <ul>
+                      {tender.documents.map((document, index) => (
+                        <li key={index}>{document}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+              <div className="mt-4">
+                <button
+                  onClick={() => handleApplyTender(tender.id)}
+                  className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg"
+                >
+                  Apply
+                </button>
+              </div>
+            </div>
+          ))}
         </div>
-        {/* Add tender form */}
-        {/* {showAddForm && (
-          <AddTenderForm
-            onSubmit={handleAddTender}
-            onCancel={() => setShowAddForm(false)}
-          />
-        )} */}
+        {/* Place for AddTenderForm if needed */}
+        {/* {showAddDialog && <AddTenderForm onCancel={() => setShowAddDialog(false)} onSubmit={handleAddTender} />} */}
       </div>
     </UserLayout>
   );
 };
 
 export default AdminTenders;
+//

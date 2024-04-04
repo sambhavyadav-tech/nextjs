@@ -27,9 +27,8 @@ const TenderForm = ({ onSubmit, onCancel }) => {
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
 
-    // Use fetch to submit the form data to your API endpoint
     try {
-      const response = await fetch("/api/tenders", {
+      const response = await fetch("/api/admin/addTenders", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -42,8 +41,10 @@ const TenderForm = ({ onSubmit, onCancel }) => {
         alert("Tender submission successful");
         // Optionally reset the form or redirect the user
       } else {
-        // Handle server errors or invalid responses
-        alert("Failed to submit tender. Please try again.");
+        // Enhanced error handling
+        const errorResponse = await response.json(); // Assuming the server sends back a JSON response with error details
+        console.error("Failed to submit tender:", errorResponse.message);
+        alert(`Failed to submit tender: ${errorResponse.message}`);
       }
     } catch (error) {
       // Handle network errors or issues with the fetch call

@@ -1,5 +1,3 @@
-// components/adminLayout.js
-
 import React from "react";
 import { useState } from "react";
 import Link from "next/link";
@@ -14,7 +12,7 @@ const UserLayout = ({ children }) => {
   };
 
   return (
-    <div className="flex">
+    <div className="flex flex-col min-h-screen">
       {/* Sidebar */}
       <nav className="bg-gray-800 text-white w-64 py-4 px-4 flex flex-col fixed h-full">
         {/* Logo */}
@@ -57,7 +55,7 @@ const UserLayout = ({ children }) => {
       </nav>
 
       {/* Main Content */}
-      <div className="ml-64 flex-1">
+      <div className="ml-64 flex-1 flex flex-col">
         {/* Navbar */}
         <nav className="bg-gray-800 text-white py-4 px-4 mb-2 flex justify-between items-center">
           <div className="flex-grow flex justify-center">
@@ -90,7 +88,7 @@ const UserLayout = ({ children }) => {
         </nav>
 
         {/* Main Content Area */}
-        <main className="p-4">{children}</main>
+        <main className="p-4 flex-grow">{children}</main>
         <Footer />
       </div>
     </div>
