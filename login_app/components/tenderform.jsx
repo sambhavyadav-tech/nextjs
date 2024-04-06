@@ -22,7 +22,8 @@ export default function AddTender() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/admin/addTenders", {
+      console.log("get env data :: "+process.env.NEXT_PUBLIC_API_URL)
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/addTenders`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

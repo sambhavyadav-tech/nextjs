@@ -9,7 +9,7 @@ export default function RemoveBtn({ id }) {
     const confirmed = confirm("Are you sure?");
 
     if (confirmed) {
-      const res = await fetch(`http://localhost:3000/api/admin/deleteTender?id=${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/deleteTender?id=${id}`, {
         method: "DELETE",
       });
 

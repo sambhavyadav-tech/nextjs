@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 
 const getTenderById = async (id) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/admin/updateTender/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/updateTender/${id}`, {
      method: "GET",
     });
 
