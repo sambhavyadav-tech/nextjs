@@ -1,40 +1,12 @@
 
 'use client'
+import Link from "next/link";
+import RemoveBtn from "@/components/removeTender";
+
+import { HiPencilAlt } from "react-icons/hi";
 import React, { useState, useEffect } from 'react';
-import AdminLayout from '../../components/adminlayout';
-import AddTenderForm from '../../components/tenderform'; // Import the add tender form component
-
-const AdminTenders = () => {
-  const [showAddDialog, setShowAddDialog] = useState(false); // State to manage whether to show the add tender dialog
-//   const [showAddForm, setShowAddForm] = useState(false); // State to manage whether to show the add tender form
-  const [tenders, setTenders] = useState([]);
-  const [expandedDescriptionId, setExpandedDescriptionId] = useState(null);
-
-  useEffect(() => {
-    // Fetch tenders from the API
-    const fetchTenders = async () => {
-      try {
-        const res = await fetch("/api"); // Assuming the API endpoint is '/api/tenders'
-        if (!res.ok) {
-          throw new Error("Failed to fetch tenders");
-        }
-        const data = await res.json();
-        setTenders(data);
-      } catch (error) {
-        console.error("Error fetching tenders:", error);
-      }
-    };
-
-    fetchTenders();
-  }, []);
-
-  const handleAddTender = (newTender) => {
-    // Logic to add the new tender
-    console.log("Added tender:", newTender);
-    // setShowAddForm(false); // Hide the add tender form
-    setShowAddDialog(false); // Hide the add tender dialog
-  };
-
+import AdminLayout from '../../../components/adminlayout';
+import EditTender from '../EditTender/[id]/page';
   const handleUpdateTender = (tenderId) => {
     // Logic to update the selected tender
     console.log("Updated tender:", tenderId);
@@ -48,6 +20,28 @@ const AdminTenders = () => {
   const toggleDescription = (tenderId) => {
     setExpandedDescriptionId((prevId) => (prevId === tenderId ? null : tenderId));
   };
+
+
+
+  const getTenders = async () => {
+    try {
+      const res = await fetch("http://localhost:3000/api/admin/addTenders", {
+        cache: "no-store",
+      });
+  
+      if (!res.ok) {
+        throw new Error("Failed to fetch tenders");
+      }
+  
+      return res.json();
+    } catch (error) {
+      console.log("Error loading tenders: ", error);
+    }
+  };
+  
+  export default async function TenderList() {
+      
+    const { tenders } = await getTenders();
 
   return (
     <AdminLayout>
@@ -71,43 +65,27 @@ const AdminTenders = () => {
             </thead>
             <tbody className="bg-white divide-y divide-gray-200">
               {tenders.map((tender) => (
-                <tr key={tender.id}>
+                <tr key={tender._id}>
                   {/* Tender data cells */}
-                  <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900 sm:px-3">{tender.id}</td>
-                  <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900 sm:px-3">{tender.title}</td>
+                  <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900 sm:px-3">{tender.tenderId}</td>
+                  <td className="px-2 py-4 whitespace-nowrap text-sm font-medium text-gray-900 sm:px-3">{tender.tenderTitle}</td>
                   {/* Description with show more/less toggle */}
+                  
                   <td className="hidden md:table-cell px-2 py-4 whitespace-nowrap text-sm text-gray-500">
-                    {expandedDescriptionId === tender.id ? tender.description : `${tender.description.substring(0, 50)}${tender.description.length > 50 ? '...' : ''}`}
-                    {tender.description.length > 50 && (
-                      <button className="text-blue-500 hover:underline focus:outline-none" onClick={() => toggleDescription(tender.id)}>
-                        {expandedDescriptionId === tender.id ? 'Show less' : 'Show more'}
-                      </button>
-                    )}
+                   {tender.tenderDescription}
                   </td>
                   {/* Other cells */}
-                  <td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.publishdate}</td>
-<td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.closingdate}</td>
-<td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.tenderstatus}</td>
+                  <td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.publishDate}</td>
+<td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.closingDate}</td>
+<td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.tenderStatus}</td>
 <td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.category}</td>
-<td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">
-<div className="flex items-center justify-center">
-{tender.documents ? 'Available' : 'N/A'}
-</div>
-</td>
+<td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">{tender.tenderDocuments}</td>
 <td className="px-2 py-4 whitespace-nowrap text-sm text-gray-500 sm:px-3">
 <div className="flex items-center justify-center space-x-2">
-<button
-onClick={() => handleUpdateTender(tender.id)}
-className="px-2 py-1 bg-green-500 text-white rounded hover:bg-green-700 focus:outline-none"
->
-Update
-</button>
-<button
-onClick={() => handleDeleteTender(tender.id)}
-className="px-2 py-1 bg-red-500 text-white rounded hover:bg-red-700 focus:outline-none"
->
-Delete
-</button>
+<Link href={`/admin/EditTender/${tender._id}`}>
+              <HiPencilAlt size={24} />
+            </Link>
+            <RemoveBtn id={tender._id} />
 </div>
 </td>
 </tr>
@@ -119,5 +97,3 @@ Delete
     </AdminLayout>
   );
 };
-
-export default AdminTenders;

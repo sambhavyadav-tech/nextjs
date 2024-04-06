@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import Layout from "../components/layout";
+import Layout from "../../components/layout";
 
 const Login = () => {
   const router = useRouter();

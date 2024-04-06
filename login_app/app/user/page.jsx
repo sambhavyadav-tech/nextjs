@@ -2,7 +2,7 @@
 'use client'
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
-import UserLayout from '../components/userlayout';
+import UserLayout from '../../components/userlayout';
 
 const Admin = () => {
 

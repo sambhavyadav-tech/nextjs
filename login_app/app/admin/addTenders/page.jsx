@@ -1,8 +1,8 @@
 // pages/tender.jsx
 'use client'
 import React from 'react';
-import AdminLayout from '../../components/adminlayout';
-import TenderForm from '../../components/tenderform'; // Import the TenderForm component
+import AdminLayout from '../../../components/adminlayout';
+import TenderForm from '../../../components/tenderform'; // Import the TenderForm component
 
 const Tender = () => {
     return (

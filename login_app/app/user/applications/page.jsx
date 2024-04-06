@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import UserLayout from "../../components/userlayout";
+import UserLayout from "../../../components/userlayout";
 
 const Applications = () => {
   // Hardcoded application data

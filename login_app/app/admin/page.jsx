@@ -2,7 +2,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import AdminLayout from "../components/adminlayout";
+import AdminLayout from "../../components/adminlayout";
 
 const Admin = () => {
   const tenderCount = 50;

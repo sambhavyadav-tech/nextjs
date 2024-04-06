@@ -1,8 +1,8 @@
 
 'use client'
 import React, { useState, useEffect } from 'react';
-import UserLayout from '../../components/userlayout';
-import AddTenderForm from '../../components/tenderform'; // Import the add tender form component
+import UserLayout from '../../../components/userlayout';
+import AddTenderForm from '../../../components/tenderform'; // Import the add tender form component
 
 const AdminTenders = () => {
   const [showAddDialog, setShowAddDialog] = useState(false); // State to manage whether to show the add tender dialog

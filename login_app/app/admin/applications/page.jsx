@@ -3,7 +3,7 @@
 // pages/admin/applications.js
 
 import React from "react";
-import AdminLayout from "../../components/adminlayout";
+import AdminLayout from "../../../components/adminlayout";
 
 const Applications = () => {
   // Hardcoded application data
